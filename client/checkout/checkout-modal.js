@@ -22,14 +22,14 @@ Template.shop.onRendered( () => {
     });
     $('#checkout-total').html('');
     $('#coupon-button').on("click", {
-      total: Number(totalcost)
+      total: getTotal()
     }, checkCoupon);
     $('#checkout-button').on("click", {
-      total: Number(totalcost),
+      total: getTotal(),
       items: getItems()
     }, checkOut);
     totalcost = parseFloat(Math.round(totalcost * 100) / 100).toFixed(2);
-    $('#checkout-total').append('<h4 class="text-right">Total <strong>$'+ totalcost +'</strong></h4>');
+    $('#checkout-total').append('<h4 class="text-right" id="total-cost">Total <strong>'+ totalcost +'</strong></h4>');
     Meteor.subscribe('cart');
     Meteor.subscribe('items');
   });
@@ -50,7 +50,7 @@ function removeCartItem(event){
 function checkCoupon(event){
   item = {
     code:getCouponVal(),
-    totalcost:event.data.total
+    totalcost:getTotal()
   };
   Meteor.call( 'checkCoupon', item, (error, result) => {
     if(error){
@@ -62,7 +62,7 @@ function checkCoupon(event){
         $('#checkout-total').append('<h4 class="text-right text-success"><strong> You saved: $'+ result.drop +'</strong></h4>');
         newtotal = result.oldcost - result.drop;
         newtotal = parseFloat(Math.round(newtotal * 100) / 100).toFixed(2);
-        $('#checkout-total').append('<h4 class="text-right">Total <strong>$'+ newtotal +'</strong></h4>');
+        $('#checkout-total').append('<h4 class="text-right" id="total-cost">Total <strong>'+ newtotal +'</strong></h4>');
         $('#coupon-input').css({ "border": '#00FF00 1px solid'});
       }
       else{
@@ -76,7 +76,7 @@ function checkCoupon(event){
 
 function checkOut(event){
   item = {
-    total: event.data.total,
+    total: getTotal(),
     uid: Session.get('user_id'),
     items: getItems()
   };
@@ -92,6 +92,12 @@ function checkOut(event){
 
 function getCouponVal(){
   return $('#coupon-input').val();
+}
+
+function getTotal(){
+  text = $('#total-cost').text();
+  text = text.slice(6);
+  return Number(text);
 }
 
 function getItems(){
