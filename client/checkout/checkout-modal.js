@@ -6,6 +6,8 @@ import { Session } from 'meteor/session';
 Template.shop.onRendered( () => {
 
   Tracker.autorun( () => {
+    $('#coupon-button').off();
+    $('#checkout-button').off();
     var totalcost = 0;
     cart = Cart.find({uid:Session.get('user_id')}).fetch();
     $('.panel-body').html('');
