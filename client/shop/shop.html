@@ -1,0 +1,52 @@
+<template name="shop">
+  <div class="container">
+
+      <!-- Title -->
+      <div class="row">
+          <div class="col-lg-12">
+              <h3>Buy Stuff!</h3>
+          </div>
+      </div>
+      <!-- /.row -->
+
+      <!-- Page Features -->
+      <div class="row text-center" id="item-container">
+        <div class="col-md-3 col-sm-6">
+            <div class="thumbnail">
+                <img src="http://placehold.it/800x500" alt="">
+                <div class="caption">
+                    <h3>Feature Label</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                    <p>
+                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6">
+          <form id="add-item-form">
+          <div class="thumbnail">
+            <br>
+            <br>
+            <h3>Add Item</h3>
+            <br>
+            <br>
+            <p><input class="form-control" type="text" placeholder="Enter image url" id="image-input"></p>
+            <p><input class="form-control" type="text" placeholder="Enter item name" id="name-input"></p>
+            <p><div class="input-group">
+              <span class="input-group-addon">$</span>
+              <input type="number" step=".01" class="form-control" placeholder="Enter cost" id="cost-input" min="0">
+            </div></p>
+            <p>
+                <button type="submit" class="btn btn-success">Add Item</button>
+            </p>
+          </div>
+        </form>
+        </div>
+
+      </div>
+      <!-- /.row -->
+
+  </div>
+</template>
